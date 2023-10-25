@@ -1,0 +1,9 @@
+.question {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .qn-element-1, .operation-1, .qn-element-2 {
+    font-size: 50px;
+  }
+}
