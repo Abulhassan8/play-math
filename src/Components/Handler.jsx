@@ -3,22 +3,18 @@ import DisplayQuestion from "./DisplayQuestion";
 import ShowResult from "./ShowResult";
 import DisplayPoints from "./DisplayPoints";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import ChooseComponentForMode from "./ChooseComponent";
 
 const Handler = () => {
-  const dispatch = useDispatch();
+  const level = useSelector((state) => state.level);
+  const ComponentToRender = ChooseComponentForMode(level);
 
-  dispatch({
-    type: 'levelSelected',
-    payload: {
-      level: 'level-one'
-    }
-  })
   return (
     <div>
       <DisplayPoints />
-      <DisplayQuestion />
       <ShowResult />
-      <AnswerInput />
+      {ComponentToRender}
     </div>
   )
 }

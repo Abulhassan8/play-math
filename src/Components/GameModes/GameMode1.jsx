@@ -1,32 +1,55 @@
 import DisplayQuestion from "../DisplayQuestion";
 import AnswerInput from "../AnswerInput";
 import generateOperands from "../../Actions/GenerateOperands";
+import CreateQuestion from "../../Actions/CreateQuestion";
+import { generateRandomNumber } from "../../helpers/helperFunctions";
+import { useState } from 'react';
+import {evaluate} from "mathjs";
+import { useDispatch } from "react-redux";
+import DisplayPoints from "../DisplayPoints";
+import ShowResult from "../ShowResult";
+
+import '../../Assets/Styles/GameMode1.scss';
+import CountDownTimer from "../CountDownTimer";
 
 const GameMode1 = () => {
-  const time = 20;
-  let questionSet;
-  const level = 'level_one';
+  const dispatch = useDispatch();
 
+  const [questionNumber, setQuestionNumber] = useState(1);
+  dispatch({
+    type: 'questionNumber',
+    payload: {
+      questionNumber,
+    },
+  })
 
-  const generateQuestion = () => {
-    const operand1 = generateOperands(level_one);
-    const operand2 = generateOperands(level_one);
-    const operator1 = "+";
+  const questionSetGenerated = `${generateRandomNumber(50)} + ${generateRandomNumber(50)}`;
 
-    questionSet = {
-      operands: [operand1, operand2],
-      operators: [operator1],
-    }
-  }
+  dispatch({
+    type: 'setQuestion',
+    payload: {
+      questionSetGenerated,
+    },
+  })
+  const correctAnswer = evaluate(questionSetGenerated);
 
-  const handleAnswerSubmit = (enteredAnswer) => {
-    
+  dispatch({
+    type: 'correctAnswer',
+    payload: {
+      correctAnswer,
+    },
+  })
+
+  const handleAfterSubmit1 = () => {
+    setQuestionNumber(questionNumber+1);
+
   }
 
   return (
-    <div>
-      <DisplayQuestion />
-      <AnswerInput />
+    <div className="game-mode-1">
+      <CountDownTimer resetTimer={re}/>
+      <DisplayQuestion question={questionSetGenerated} />
+      <AnswerInput handleAfterSubmit={handleAfterSubmit1}/>
     </div>
   )
 }

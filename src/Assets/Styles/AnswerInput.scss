@@ -1,10 +1,33 @@
-.answer-input {
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-  }
+.input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
 
-  input[type=number] {
-    -moz-appearance: textfield;
+    .answer-input{
+      width: 200px;
+      height: 70px;
+      padding: 20px;
+      // size: 100px;
+      font-size: 50px;
+      text-align: center
+    }
+    .input-buttons{
+      padding: 10px;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      // left: 10px;
+
+      .submit-button{
+        font-size: 25px;
+        width: 100px;
+      }
+
+      .reset-button{
+        font-size: 20px;
+        width: 80px;
+      }
+    }
   }
-}

@@ -3,6 +3,8 @@ const initialState = {
   totalPoints: 0,
   isAnswerCorrect: false,
   level: 'level-one',
+  questionNumber: 0,
+  timeLeft: 10,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +25,7 @@ const reducer = (state = initialState, action) => {
     case 'setQuestion':
       return {
         ...state,
-        question: payload.question,
+        question: payload.questionSetGenerated,
       }
     case 'isAnswerCorrect':
       return {
@@ -45,6 +47,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         totalPoints: state.totalPoints + payload.pointChange,
+      }
+    case 'updateTimer':
+      console.log("update timer called")
+      return {
+        ...state,
+        timeLeft: payload.timeLeft,
+      }
+    case 'questionNumber':
+      return {
+        ...state,
+        questionNumber: state.questionNumber + payload.questionNumber,
       }
     default:
       return state

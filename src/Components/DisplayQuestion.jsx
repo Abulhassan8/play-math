@@ -1,14 +1,12 @@
 import '../Assets/Styles/Question.scss';
 import createQuestion from '../Actions/CreateQuestion';
+import { useSelector } from "react-redux";
 
-const DisplayQuestion = () => {
-  const level = 'level-one';
-  console.log("Display Question Called....");
-  const questionGenerated = createQuestion(level);
+const DisplayQuestion = (props) => {
 
   return (
     <div className="question">
-      {questionGenerated}
+      {props.question}
     </div>
   )
 }

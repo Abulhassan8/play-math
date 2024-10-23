@@ -16,10 +16,19 @@ const generateQuestionWithLevel = (level) =>{
   }
 };
 
-const CreateQuestion = (level) => {
+const CreateQuestion = () => {
+  const level = 'level_one';
+
   const dispatch = useDispatch();
   const questionSetGenerated = generateQuestionWithLevel(level);
   const correctAnswer = evaluate(questionSetGenerated);
+
+  dispatch({
+    type: 'setQuestion',
+    payload: {
+      questionSetGenerated,
+    },
+  })
 
   dispatch({
     type: 'correctAnswer',
